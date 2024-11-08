@@ -3,6 +3,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "helloworld:latest"
         DOCKER_REGISTRY = "hsavasli/helloworld"
+        KUBECONFIG = "/root/.kube/config"
     }
 
     stages {
@@ -48,7 +49,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh 'kubectl apply -f kubernetes/deployment.yaml'
+                    sh 'kubectl --kubeconfig ${KUBECONFIG} apply -f kubernetes/deployment.yaml'
                 }
             }
         }
