@@ -10,6 +10,10 @@ pipeline {
                 git branch: 'main', url:'https://github.com/huseyinsavasli/helloworld.git'
             }
         }
+        stage('Set Permissions') {
+            steps {
+                sh 'chmod +x ./mvnw'
+            }
         stage('Build') {
             steps {
                 sh './mvnw clean install'
