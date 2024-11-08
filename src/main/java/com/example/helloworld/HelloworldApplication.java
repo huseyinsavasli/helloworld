@@ -12,6 +12,7 @@ public class HelloWorldApplication {
     }
 }
 
+
 @RestController
 class HelloWorldController {
     @GetMapping("/")
