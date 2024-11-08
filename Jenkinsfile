@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/huseyinsavasli/helloworld.git'
+                git branch: 'main', url:'https://github.com/huseyinsavasli/helloworld.git'
             }
         }
         stage('Build') {
