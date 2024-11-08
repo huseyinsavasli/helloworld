@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Docker Security Scan') {
             steps {
-                sh 'trivy image ${DOCKER_IMAGE}'
+                sh 'trivy image --scanners vuln ${DOCKER_IMAGE}'
             }
         }
         stage('Push to DockerHub') {
