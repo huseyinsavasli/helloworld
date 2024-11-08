@@ -4,6 +4,7 @@ pipeline {
         DOCKER_IMAGE = "helloworld"
         DOCKER_REGISTRY = "hsavasli/helloworld"
     }
+
     stages {
         stage('Checkout') {
             steps {
@@ -23,7 +24,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}")
+                 sh 'docker.build -t ${DOCKER_IMAGE} .'
                 }
             }
         }
