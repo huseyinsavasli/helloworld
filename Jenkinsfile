@@ -30,6 +30,8 @@ pipeline {
         }
         stage('Docker Security Scan') {
             steps {
+                sh 'docker pull ghcr.io/aquasecurity/trivy-db:latest'
+                sh 'docker run --rm -v ~/.cache/trivy:/root/.cache aquasecurity/trivy-db:latest'
                 sh 'trivy image ${DOCKER_IMAGE}'
             }
         }
