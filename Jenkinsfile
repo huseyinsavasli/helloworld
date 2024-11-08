@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "helloworld:latest"
         DOCKER_REGISTRY = "hsavasli/helloworld"
-        KUBECONFIG = "/root/.kube/config"
+        KUBECONFIG = "/var/jenkins_home/.kube/config"
     }
 
     stages {
