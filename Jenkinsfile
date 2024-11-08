@@ -2,12 +2,12 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = "helloworld"
-        DOCKER_REGISTRY = "yourdockerhub/helloworld"
+        DOCKER_REGISTRY = "hsavasli/helloworld"
     }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/yourusername/helloworld.git'
+                git 'https://github.com/huseyinsavasli/helloworld.git'
             }
         }
         stage('Build') {
