@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Docker Security Scan') {
             steps {
-                sh 'trivy --skip-update image ${DOCKER_IMAGE}'
+                sh 'trivy --no-update image ${DOCKER_IMAGE}'
             }
         }
         stage('Push to DockerHub') {
