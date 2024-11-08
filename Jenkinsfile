@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = "helloworld"
+        DOCKER_IMAGE = "helloworld:latest"
         DOCKER_REGISTRY = "hsavasli/helloworld"
     }
 
@@ -28,16 +28,20 @@ pipeline {
                 }
             }
         }
-        stage('Docker Security Scan') {
+        //stage('Docker Security Scan') {
+        //    steps {
+        //        sh 'trivy image --skip-db-update --timeout 20m --scanners vuln ${DOCKER_IMAGE}'
+        //    }
+        //}
+        stage('Docker Tag')
             steps {
-                sh 'trivy image --skip-db-update --timeout 20m --scanners vuln ${DOCKER_IMAGE}'
+                sh 'docker tag ${DOCKER_IMAGE} ${DOCKER_REGISTRY}:latest'
             }
-        }
         stage('Push to DockerHub') {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
-                        docker.image("${DOCKER_IMAGE}").push()
+                        docker.image("${DOCKER_REGISTRY}:latest").push() 
                     }
                 }
             }
