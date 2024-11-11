@@ -5,6 +5,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx  # NGINX Ingress Controller pairing
   rules:
     - host: {{ .Values.ingress.hostname }}
       http:
