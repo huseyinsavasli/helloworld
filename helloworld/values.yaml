@@ -1,0 +1,29 @@
+replicaCount: 2
+
+image:
+    repository: docker.io/hsavasli/helloworld
+    tag: latest
+    pullPolicy: IfNotPresent
+    
+service:
+    type: LoadBalancer
+    port: 80
+    targetPort: 8080
+    
+ingress:
+    enabled: true
+    hostname: helloworld.local
+
+serviceAccount:
+  create: true                      # ServiceAccount 
+  name: ""                          # ServiceAccount release name will be used
+  automount: true                   # Token'ı automatic mount
+  annotations: {}                
+
+autoscaling:
+  enabled: true                   # Autoscaling
+  minReplicas: 1                  # Minimum replica 
+  maxReplicas: 5                  # Maksimum replica 
+  targetCPUUtilizationPercentage: 80  # CPU using hedefi %
+ 
+
