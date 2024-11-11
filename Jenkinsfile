@@ -53,7 +53,7 @@ pipeline {
             steps {
                 script {
                     // with Helm Kubernetes Deployments
-                    sh "helm upgrade --install ${HELM_RELEASE_NAME} ./helm --kubeconfig ${KUBECONFIG} --set image.repository=${DOCKER_REGISTRY},image.tag=latest"
+                    sh "helm upgrade --install ${HELM_RELEASE_NAME} ./helloworld --kubeconfig ${KUBECONFIG} --set image.repository=${DOCKER_REGISTRY},image.tag=latest"
                 }
             }
         }
