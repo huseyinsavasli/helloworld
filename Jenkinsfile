@@ -5,8 +5,8 @@ pipeline {
         DOCKER_REGISTRY = "hsavasli/helloworld"
         KUBECONFIG = "/var/jenkins_home/.kube/config"
         HELM_RELEASE_NAME = "helloworld"
-        HELM_CHART_REPO = "https://github.com/huseyinsavasli/helloworld.git"  // GitHub repository linki
-        HELM_CHART_PATH = "helm/helloworld"  // Chart dizininizin yolu
+        GITHUB_REPO = "https://github.com/huseyinsavasli/helloworld.git"  // GitHub repository
+        GITHUB_HELM_CHART_PATH = "helloworld"  //on GitHub'daki Helm chart's path
     }
 
     stages {
@@ -52,11 +52,8 @@ pipeline {
         stage('Deploy to Kubernetes with Helm') {
             steps {
                 script {
-                    // GitHub pull helm chart
-                    sh 'git clone ${HELM_CHART_REPO} helm-chart'
-
                     // with Helm Kubernetes Deployments
-                    sh "helm upgrade --install ${HELM_RELEASE_NAME} helm-chart/${HELM_CHART_PATH} --kubeconfig ${KUBECONFIG} --set image.repository=${DOCKER_REGISTRY},image.tag=latest"
+                    sh "helm upgrade --install ${HELM_RELEASE_NAME} ./helm --kubeconfig ${KUBECONFIG} --set image.repository=${DOCKER_REGISTRY},image.tag=latest"
                 }
             }
         }
