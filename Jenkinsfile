@@ -30,11 +30,11 @@ pipeline {
                 sh 'docker build -t ${DOCKER_IMAGE} .'
             }
         }
-        //stage('Docker Security Scan') {
-        //    steps {
-        //        sh 'trivy image --skip-db-update --timeout 20m --scanners vuln ${DOCKER_IMAGE}'
-        //    }
-        //}
+        stage('Docker Security Scan') {
+            steps {
+                sh 'trivy image --skip-db-update --timeout 20m --scanners vuln ${DOCKER_IMAGE}'
+            }
+        }
         stage('Docker Tag') {
             steps {
                 sh 'docker tag ${DOCKER_IMAGE} ${DOCKER_REGISTRY}:latest'
